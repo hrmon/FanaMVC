@@ -5,8 +5,8 @@ import model.User;
 public interface IBankAccount {
 	public void closeBankAccount();
 
-	public void newBankAccount(String userName);
+	public long newBankAccount(String userName);
 
-	public void newBankAccount(User user);
+	public long newBankAccount(User user);
 
 }

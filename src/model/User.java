@@ -1,5 +1,7 @@
 package model;
 
+import model.interfaces.IUser;
+
 public class User implements IUser {
 	final String name;
 

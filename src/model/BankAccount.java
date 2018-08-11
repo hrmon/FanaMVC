@@ -2,6 +2,9 @@ package model;
 
 import java.util.Random;
 
+import model.interfaces.IBankAccount;
+import model.interfaces.IUser;
+
 public class BankAccount implements IBankAccount {
 	private static Random rnd = new Random(0);
 

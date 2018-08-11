@@ -1,4 +1,4 @@
-package view;
+package contoroler;
 
 import java.io.IOException;
 
@@ -8,23 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import contoroler.UserControler;
+import model.User;
 
 /**
- * Servlet implementation class UserServlet
+ * Servlet implementation class NewUser
  */
-@WebServlet("/UserServlet")
-public class UserServlet extends HttpServlet {
+@WebServlet("/NewUser")
+public class NewUser extends HttpServlet implements IUserControler {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserServlet() {
+	public NewUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,8 +32,10 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userName = request.getParameter("userName");
+		request.getParameter("pass");
+		request.getSession().setAttribute("userName", userName);
+		response.sendRedirect("index.jsp");
 	}
 
 	/**
@@ -48,16 +46,19 @@ public class UserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
-		JSONParser parser = new JSONParser();
-		try {
-			JSONObject json = (JSONObject) parser.parse(request.getReader());
-			String name = (String) json.get("userName");
-			new UserControler().newUser(name);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	@Override
+	public User getUser(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void newUser(String name) {
+		// TODO Auto-generated method stub
 
 	}
+
 }

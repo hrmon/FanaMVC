@@ -1,8 +1,10 @@
 package contoroler;
 
+import model.User;
+
 public interface IUserControler {
 
-	public void getUser(String name);
+	public User getUser(String name);
 
 	public void newUser(String name);
 
