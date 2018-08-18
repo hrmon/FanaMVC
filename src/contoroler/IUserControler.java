@@ -4,8 +4,8 @@ import model.User;
 
 public interface IUserControler {
 
-	public User getUser(String name);
+    public User getUser(String name, String pass);
 
-	public void newUser(String name);
+    public void newUser(String name, String pass);
 
 }

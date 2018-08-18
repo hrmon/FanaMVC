@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Bank;
+import model.BankAccount;
 import model.User;
 
 /**
  * Servlet implementation class NewUser
  */
-@WebServlet("/NewUser")
+@WebServlet("/newaccount")
 public class NewAccount extends HttpServlet implements IBankAccount {
 	private static final long serialVersionUID = 1L;
 
@@ -23,13 +23,15 @@ public class NewAccount extends HttpServlet implements IBankAccount {
 	 */
 	public NewAccount() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void closeBankAccount() {
+	public void closeBankAccount(User user) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public void closeBankAccount(String userName) {
 	}
 
 	/**
@@ -39,10 +41,7 @@ public class NewAccount extends HttpServlet implements IBankAccount {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userName = (String) request.getSession().getAttribute("userName");
-		request.getSession().getAttribute("pass");
-		request.setAttribute("accountNumber", newBankAccount(userName));
-		response.sendRedirect("index.jsp");
+		doPost(request, response);
 	}
 
 	/**
@@ -53,18 +52,20 @@ public class NewAccount extends HttpServlet implements IBankAccount {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String userName =(String) request.getSession().getAttribute("username");
+		request.getSession().setAttribute("accountnumber", newBankAccount(userName));
+		response.sendRedirect("index.jsp");
 	}
 
 	@Override
 	public long newBankAccount(String userName) {
-		return newBankAccount(new Bank().getUser(userName));
+		return BankAccount.newAccount(User.getUser(userName));
 
 	}
 
 	@Override
 	public long newBankAccount(User user) {
-		return new Bank().newAcount(user);
+		return BankAccount.newAccount(user);
 	}
 
 }

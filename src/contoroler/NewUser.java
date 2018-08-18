@@ -13,52 +13,50 @@ import model.User;
 /**
  * Servlet implementation class NewUser
  */
-@WebServlet("/NewUser")
+@WebServlet("/newuser")
 public class NewUser extends HttpServlet implements IUserControler {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public NewUser() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public NewUser() {
+        super();
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String userName = request.getParameter("userName");
-		request.getParameter("pass");
-		request.getSession().setAttribute("userName", userName);
-		response.sendRedirect("index.jsp");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        String userName = request.getParameter("username");
+        String pass = request.getParameter("pass");
+        this.newUser(userName, pass);
+        request.getSession().setAttribute("username", userName);
+        response.sendRedirect("index.jsp");
+    }
 
-	@Override
-	public User getUser(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public  User getUser(String name, String pass) {
+        return User.getUser(name);
+    }
 
-	@Override
-	public void newUser(String name) {
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public  void newUser(String name, String pass) {
+        User.addUser(name, pass);
+    }
 
 }
